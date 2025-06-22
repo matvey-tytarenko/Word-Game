@@ -1,26 +1,29 @@
 const http = require("http");
 const app = require("./index");
 
+const PORT = process.env.PORT || 5000;
+let status = true;
+
+router(status, PORT);
+
 // Server Config
 const server = http.createServer(app);
-const PORT = process.env.PORT || 5000;
+
+// Routing
+function router(status, port) {
+  app.get("/", (req, res) => {
+    res.json({
+      "Server Status": status,
+      "Server URL": `http://localhost:${port}`,
+    });
+  });
+}
 
 // Start server
 server.listen(PORT, (error) => {
   if (error) {
-    app.get("/", (req, res) => {
-      res.status(400).json({
-        "Server status": false,
-      });
-    });
-    console.error(`Server Error: ${error}`);
+    console.error("❌ Server failed:", error);
   } else {
-    app.get("/", (req, res) => {
-      res.json({
-        "Server status": true,
-        "Server url": `http://localhost:${PORT}`,
-      });
-    });
-    console.log(`Server has been started on PORT: ${PORT}`);
+    console.log(`✅ Server started on http://localhost:${PORT}`);
   }
 });

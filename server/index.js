@@ -16,10 +16,10 @@ app.use("/api/auth", router);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    console.log("Data Base is connected!");
+    console.log("✅ Data Base is connected!");
   })
   .catch((err) => {
-    console.error(`Data Base Error: ${err}`);
+    console.error(`❌ Data Base Error: ${err}`);
   });
 
 // Export module
