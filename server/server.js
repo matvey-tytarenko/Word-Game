@@ -15,6 +15,7 @@ function router(status, port) {
     res.json({
       "Server Status": status,
       "Server URL": `http://localhost:${port}`,
+      "Database Connected": "successfully!",
     });
   });
 }
